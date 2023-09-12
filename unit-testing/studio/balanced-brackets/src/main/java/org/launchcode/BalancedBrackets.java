@@ -22,7 +22,9 @@ public class BalancedBrackets {
     public static boolean hasBalancedBrackets(String str) {
         int brackets = 0;
         for (char ch : str.toCharArray()) {
-            if (ch == '[') {
+            if (str.indexOf(']') < str.indexOf('[')) {
+                return false;
+            } else if(str.lastIndexOf('[') > str.lastIndexOf(']')) {
                 brackets++;
             } else if (ch == ']') {
                 brackets--;
