@@ -10,45 +10,110 @@ class BalancedBracketsTest {
     //TODO: add tests here
     @Test
     public void onlyBracketsReturnsTrue() {
-        assertTrue(BalancedBrackets.hasBalancedBrackets("[]"));
-    }
-    @Test
-    public void emptyTest() {
-        assertEquals(true, true);
+        String message = "a single set of balanced brackets returns true";
+        assertTrue(BalancedBrackets.hasBalancedBrackets("[]"), message);
     }
 
+    @Test
+    public void singleBracketsBeforeOtherCharacters()  {
+        String message = "balanced brackets in front of other characters returns true";
+        String testData = "[]LaunchCode";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(result, message);
+    }
     @Test
     public void stringBracketsReturnsTrue() {
-        assertTrue(BalancedBrackets.hasBalancedBrackets("[LaunchCode]"));
-    }
-
-    @Test
-    public void stringWithNoBrackets() {
-        assertTrue(BalancedBrackets.hasBalancedBrackets(("LaunchCode")));
-    }
-
-    @Test
-    public void stringWithOneBracketReturnsFalse() {
-        assertFalse(BalancedBrackets.hasBalancedBrackets("["));
+        String message = "balanced brackets around other characters returns true";
+        String testData = "[LaunchCode]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(result, message);
     }
 
     @Test
     public void stringWithUnbalancedBracketReturnsFalse() {
-        assertFalse(BalancedBrackets.hasBalancedBrackets("[Launch[Code]"));
+        String message = "balanced brackets among other characters returns true";
+        String testData = "Launch[Code]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(result, message);
     }
 
     @Test
-    public void nestedBrackets() {
-        assertTrue(BalancedBrackets.hasBalancedBrackets("[[Launch]]Code"));
+    public void tripleBalancedBrackets() {
+        String message = "three consecutive pairs of brackets returns true";
+        String testData = "[][][]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(result, message);
     }
 
     @Test
-    public void unmatchedOpeningBracket() {
-        assertFalse(BalancedBrackets.hasBalancedBrackets("Launch[Co[de"));
+    public void tripleNestedBalancedBrackets() {
+        String message = "three nested pairs of brackets returns true";
+        String testData = "[[[]]]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(result, message);
     }
 
     @Test
-    public void unmatchedClosingBracket() {
-        assertFalse(BalancedBrackets.hasBalancedBrackets("Launch]Co]de"));
+    public void singleOpeningBracket() {
+        String message = "a single opening bracket returns false";
+        String testData = "[";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(result, message);
+    }
+
+    @Test
+    public void singleClosingBracket() {
+        String message = "a single closing bracket returns false";
+        String testData = "]";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(result, message);
+    }
+
+    @Test
+    public void reversedBrackets() {
+        String message = "a set of reverse bracket returns false";
+        String testData = "][";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(result, message);
+    }
+
+    @Test
+    public void singleBracketWithOtherCharacters() {
+        String message = "a single opening bracket with other characters returns false";
+        String testData = "[LaunchCode";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(result, message);
+    }
+
+    @Test
+    public void unbalancedBracketsAmongOtherCharacters() {
+        String message = "unbalanced brackets among other characters returns false";
+        String testData = "Launch]Code[";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(result, message);
+    }
+
+    @Test
+    public void mixOfUnbalancedBrackets() {
+        String message = "a mix of unbalanced brackets returns false";
+        String testData = "[[]][][";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertFalse(result, message);
+    }
+
+    @Test
+    public void noBrackets() {
+        String message = "a string of characeters without brackets returns true";
+        String testData = "LaunchCode";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(result, message);
+    }
+
+    @Test
+    public void emptyString() {
+        String message = "an empty string returns true";
+        String testData = "";
+        boolean result = BalancedBrackets.hasBalancedBrackets(testData);
+        assertTrue(result, message);
     }
 }
